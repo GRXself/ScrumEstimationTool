@@ -1,0 +1,10 @@
+# ignore local setting files
+.DS_Store
+.idea/
+
+# ignore compiled files
+*/bin/
+*/obj/
+
+# ignore emacs auto saved file (back up)
+*~
