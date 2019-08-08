@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ScrumEstimationTool.Core;
+using ScrumEstimationTool.Models;
 
 namespace ScrumEstimationTool.Controllers
 {
@@ -12,14 +13,19 @@ namespace ScrumEstimationTool.Controllers
             return View();
         }
 
-        public ActionResult<string> GetCurrentEstimationResult()
+        public ActionResult<EstimationResultModel> GetCurrentEstimationResult()
         {
-            return _estimationResult.GetEstimationResult();
+            return new EstimationResultModel
+            {
+                EstimationResult = _estimationResult.GetEstimationResult(),
+                Count = _estimationResult.GetEstimationCount()
+            };
         }
 
-        public void ResetEstimation()
+        public IActionResult ResetEstimation()
         {
             EstimationResult.ResetEstimationResult();
+            return Ok();
         }
     }
 }

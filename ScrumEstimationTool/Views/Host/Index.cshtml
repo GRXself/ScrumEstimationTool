@@ -14,7 +14,10 @@
             
         },
         success: function(currentEstimationResult) {
-          $('#estimation-result-content').text(currentEstimationResult);
+          if (confirm(currentEstimationResult.count + " guys have given their estimation, are you sure to reveal the result?"))
+          {
+            $('#estimation-result-content').text(currentEstimationResult.estimationResult);
+          }
         }
       })
     }

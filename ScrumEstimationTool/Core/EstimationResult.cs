@@ -34,6 +34,11 @@ namespace ScrumEstimationTool.Core
             return ToString();
         }
 
+        public int GetEstimationCount()
+        {
+            return _estimationPoints.Count;
+        }
+
         public void AddNewEstimation(int estimatedPoint)
         {
             _estimationPoints.Add(estimatedPoint);
