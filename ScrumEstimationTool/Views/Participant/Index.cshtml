@@ -1,0 +1,30 @@
+@model object
+
+@{
+    ViewBag.Title = "Scrum Estimation Tool: Participant";
+    Layout = "_Layout";
+}
+
+<script>
+    function SubmitEstimation() {
+      $.ajax({
+        url: '@Url.Action("SubmitEstimationPoint", "Participant")',
+        type: 'POST',
+        data: {
+            estimationPoint: $('#participant-estimation').val(),
+        },
+        success: function() {
+          alert("Submit Success");
+        }
+      })
+    }
+</script>
+
+<h2>Participant</h2>
+
+<div>
+    <form>
+        <input id="participant-estimation" type="text"/>
+        <input type="button" onclick="SubmitEstimation()" value="Submit my estimation"/>
+    </form>
+</div>
