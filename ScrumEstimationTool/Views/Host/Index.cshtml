@@ -1,0 +1,49 @@
+@model object
+
+@{
+    ViewBag.Title = "Scrum Estimation Tool: Host";
+    Layout = "_Layout";
+}
+
+<script type="text/javascript">
+    function GetCurrentEstimationResult() {
+      $.ajax({
+        url: '@Url.Action("GetCurrentEstimationResult", "Host")',
+        type: 'POST',
+        data: {
+            
+        },
+        success: function(currentEstimationResult) {
+          $('#estimation-result-content').text(currentEstimationResult);
+        }
+      })
+    }
+    
+    function Reset() {
+      $.ajax({
+        url: '@Url.Action("ResetEstimation", "Host")',
+        type: 'POST',
+        data: {
+            
+        },
+        success: function(resetResult) {
+          $('#estimation-result-content').text("Estimation Refreshed.");
+          alert("Estimation refreshed!");
+        }
+      })
+    }
+</script>
+
+<h2>Host</h2>
+
+<div>
+    <a type="button" onclick="GetCurrentEstimationResult()">&nbsp; Get current estimation result &nbsp;</a>
+    <a type="button" onclick="Reset()">&nbsp; Reset &nbsp;</a>
+</div>
+
+<div>
+    Estimation Result:
+    <p id="estimation-result-content">There is the result.</p>
+</div>
+
+

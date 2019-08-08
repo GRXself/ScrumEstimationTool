@@ -12,12 +12,12 @@ namespace ScrumEstimationTool.Core
         {
         }
 
-        public EstimationResult GetInstance()
+        public static EstimationResult GetInstance()
         {
             return _estimationResult;
         }
 
-        public void ResetEstimationResult()
+        public static void ResetEstimationResult()
         {
             _estimationResult = new EstimationResult();
         }
