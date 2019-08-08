@@ -25,7 +25,7 @@ namespace ScrumEstimationTool.Core
         public override string ToString()
         {
             var s = "";
-            _estimationPoints.ForEach(p => s = p + " ");
+            _estimationPoints.ForEach(p => s += p + " ");
             return s.Trim();
         }
 
