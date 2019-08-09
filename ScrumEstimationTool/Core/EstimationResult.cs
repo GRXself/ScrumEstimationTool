@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using ScrumEstimationTool.Models;
 
 namespace ScrumEstimationTool.Core
@@ -26,7 +27,8 @@ namespace ScrumEstimationTool.Core
         public override string ToString()
         {
             var s = "";
-            _participants.ForEach(p => s += p.Name + ": " + p.PersonalEstimation + "; ");
+            var participantsInAscendingOrder = _participants.OrderBy(p => p.PersonalEstimation).ToList();
+            participantsInAscendingOrder.ForEach(p => s += p.Name + ": " + p.PersonalEstimation + "; ");
             return s.Trim();
         }
 
