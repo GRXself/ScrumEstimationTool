@@ -23,17 +23,19 @@
     }
     
     function Reset() {
-      $.ajax({
-        url: '@Url.Action("ResetEstimation", "Host")',
-        type: 'POST',
-        data: {
-            
-        },
-        success: function(resetResult) {
-          $('#estimation-result-content').text("Estimation Refreshed.");
-          alert("Estimation refreshed!");
-        }
-      })
+      if (confirm("Sure to reset the estimation state?")) {
+        $.ajax({
+          url: '@Url.Action("ResetEstimation", "Host")',
+          type: 'POST',
+          data: {
+              
+          },
+          success: function(resetResult) {
+            $('#estimation-result-content').text("Estimation Refreshed.");
+            alert("Estimation refreshed!");
+          }
+        })
+      }
     }
 </script>
 
