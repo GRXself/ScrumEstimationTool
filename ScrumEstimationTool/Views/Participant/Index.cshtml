@@ -11,7 +11,8 @@
         url: '@Url.Action("SubmitEstimationPoint", "Participant")',
         type: 'POST',
         data: {
-            estimationPoint: $('#participant-estimation').val(),
+            Name: $('#participant-name').val(),
+            PersonalEstimation: $('#participant-estimation').val(),
         },
         success: function() {
           alert("Submit Success");
@@ -24,7 +25,10 @@
 
 <div>
     <form>
-        <input id="participant-estimation" type="text"/>
+        Your Name: <br/>
+        <input id="participant-name" type="text"/> <br/>
+        Your Estimation: <br/>
+        <input id="participant-estimation" type="text"/> <br/>
         <input type="button" onclick="SubmitEstimation()" value="Submit my estimation"/>
     </form>
 </div>

@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using ScrumEstimationTool.Models;
 
 namespace ScrumEstimationTool.Core
 {
     public class EstimationResult
     {
-        private readonly List<int> _estimationPoints = new List<int>();
+        private readonly List<ParticipantModel> _participants = new List<ParticipantModel>();
         
         private static EstimationResult _estimationResult = new EstimationResult();
 
@@ -25,7 +26,7 @@ namespace ScrumEstimationTool.Core
         public override string ToString()
         {
             var s = "";
-            _estimationPoints.ForEach(p => s += p + " ");
+            _participants.ForEach(p => s += p.Name + ": " + p.PersonalEstimation + "; ");
             return s.Trim();
         }
 
@@ -36,12 +37,12 @@ namespace ScrumEstimationTool.Core
 
         public int GetEstimationCount()
         {
-            return _estimationPoints.Count;
+            return _participants.Count;
         }
 
-        public void AddNewEstimation(int estimatedPoint)
+        public void AddNewEstimation(ParticipantModel participant)
         {
-            _estimationPoints.Add(estimatedPoint);
+            _participants.Add(participant);
         }
     }
 }

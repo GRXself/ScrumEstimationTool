@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ScrumEstimationTool.Core;
+using ScrumEstimationTool.Models;
 
 namespace ScrumEstimationTool.Controllers
 {
@@ -12,9 +13,9 @@ namespace ScrumEstimationTool.Controllers
             return View();
         }
 
-        public IActionResult SubmitEstimationPoint(int estimationPoint)
+        public IActionResult SubmitEstimationPoint(ParticipantModel participant)
         {
-            _estimationResult.AddNewEstimation(estimationPoint);
+            _estimationResult.AddNewEstimation(participant);
             return Ok();
         }
     }
