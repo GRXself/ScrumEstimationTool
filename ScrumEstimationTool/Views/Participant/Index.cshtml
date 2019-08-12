@@ -7,17 +7,26 @@
 
 <script>
     function SubmitEstimation() {
-      $.ajax({
-        url: '@Url.Action("SubmitEstimationPoint", "Participant")',
-        type: 'POST',
-        data: {
-            Name: $('#participant-name').val(),
-            PersonalEstimation: $('#participant-estimation').val(),
-        },
-        success: function() {
-          alert("Submit Success");
+        const participantName = $('#participant-name');
+        const participantEstimation = $('#participant-estimation');
+        if (participantName.val().trim().length === 0 || participantEstimation.val().trim().length === 0)
+        {
+            alert("Please give your name and estimation!");
         }
-      })
+        else
+        {
+            $.ajax({
+                url: '@Url.Action("SubmitEstimationPoint", "Participant")',
+                type: 'POST',
+                data: {
+                Name: participantName.val(),
+                PersonalEstimation: participantEstimation.val(),
+                },
+                success: function() {
+                    alert("Submit Success");
+                }
+            })
+        }
     }
 </script>
 
