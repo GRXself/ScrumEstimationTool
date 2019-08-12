@@ -5,11 +5,11 @@
     Layout = "_Layout";
 }
 
-<script>
+<script type="text/javascript">
     function SubmitEstimation() {
         const participantName = $('#participant-name');
         const participantEstimation = $('#participant-estimation');
-        if (participantName.val().trim().length === 0 || participantEstimation.val().trim().length === 0)
+        if (participantName.val().trim().length === 0 || participantEstimation.text().trim().length === 0)
         {
             alert("Please give your name and estimation!");
         }
@@ -20,7 +20,7 @@
                 type: 'POST',
                 data: {
                 Name: participantName.val(),
-                PersonalEstimation: participantEstimation.val(),
+                PersonalEstimation: participantEstimation.text(),
                 },
                 success: function() {
                     alert("Submit Success");
@@ -28,16 +28,73 @@
             })
         }
     }
+    
+    function SetEstimationOnClick(pokerCard) {
+      $('#participant-estimation').text($(pokerCard).text());
+    }
 </script>
+
+<style>
+.poker-card-container {
+  float:left;
+  padding: 30px;
+}
+.poker-card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-color: #8ec6b5;
+  transition: 0.3s;
+  
+  width: 130px;
+  padding: 70px 50px;
+  
+  text-align: center;
+  font-size: 20px;
+}
+.poker-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+</style>
 
 <h2>Participant</h2>
 
 <div>
+    Click the card below giving a quick estimation:
+</div>
+<div width="100%">
+    <div class="poker-card-container">
+        <div class="poker-card" onclick="SetEstimationOnClick(this)">1</div>
+    </div>
+    <div class="poker-card-container">
+        <div class="poker-card" onclick="SetEstimationOnClick(this)">2</div>
+    </div>
+    <div class="poker-card-container">
+        <div class="poker-card" onclick="SetEstimationOnClick(this)">3</div>
+    </div>
+    <div class="poker-card-container">
+        <div class="poker-card" onclick="SetEstimationOnClick(this)">5</div>
+    </div>
+    <div class="poker-card-container">
+        <div class="poker-card" onclick="SetEstimationOnClick(this)">8</div>
+    </div>
+    <div class="poker-card-container">
+        <div class="poker-card" onclick="SetEstimationOnClick(this)">666</div>
+    </div>
+    <div class="poker-card-container">
+        <div class="poker-card" onclick="SetEstimationOnClick(this)">0</div>
+    </div>
+</div>
+
+<div style="clear:both;"></div>
+
+<div>
     <form>
-        Your Name: <br/>
+        Your Name: 
         <input id="participant-name" type="text"/> <br/>
-        Your Estimation: <br/>
-        <input id="participant-estimation" type="text"/> <br/>
-        <input type="button" onclick="SubmitEstimation()" value="Submit"/>
+        Your Current Estimation:
+        <text id="participant-estimation">1</text>
     </form>
+</div>
+
+<div align="center">
+    <input type="button" onclick="SubmitEstimation()" value="Submit"/>
 </div>
