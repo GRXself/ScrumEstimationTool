@@ -14,7 +14,7 @@
             
         },
         success: function(currentEstimationResult) {
-          if (confirm(currentEstimationResult.count + " guys have given their estimation, are you sure to reveal the result?" +
+          if (confirm(currentEstimationResult.count + " guys voted, show result?" +
            "\rCurrent participants: \r" + currentEstimationResult.participantsName))
           {
             const estimationResultShowArea = $('#estimation-result-content');
@@ -29,7 +29,7 @@
     }
     
     function Reset() {
-      if (confirm("Sure to reset the estimation state?")) {
+      if (confirm("Reset?")) {
         $.ajax({
           url: '@Url.Action("ResetEstimation", "Host")',
           type: 'POST',
@@ -38,7 +38,6 @@
           },
           success: function(resetResult) {
             $('#estimation-result-content').text("Estimation Refreshed.");
-            alert("Estimation refreshed!");
           }
         })
       }
