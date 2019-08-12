@@ -37,6 +37,13 @@ namespace ScrumEstimationTool.Core
             return ToString();
         }
 
+        public string GetParticipantsName()
+        {
+            var s = "";
+            _participants.ForEach(p => s += p.Name + "\r");
+            return s.Trim();
+        }
+
         public int GetEstimationCount()
         {
             return _participants.Count;
