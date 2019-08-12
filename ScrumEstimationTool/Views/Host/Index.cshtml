@@ -17,7 +17,12 @@
           if (confirm(currentEstimationResult.count + " guys have given their estimation, are you sure to reveal the result?" +
            "\rCurrent participants: \r" + currentEstimationResult.participantsName))
           {
-            $('#estimation-result-content').text(currentEstimationResult.estimationResult);
+            const estimationResultShowArea = $('#estimation-result-content');
+            estimationResultShowArea.text("");
+            for (const singleEstimation of currentEstimationResult.estimationResult) 
+            {
+              estimationResultShowArea.append(singleEstimation + "<br/>");
+            }
           }
         }
       })
@@ -48,8 +53,8 @@
 </div>
 
 <div>
-    Estimation Result:
-    <p id="estimation-result-content">There is the result.</p>
+  Estimation Result:
+  <p id="estimation-result-content">There is the result.</p>
 </div>
 
 

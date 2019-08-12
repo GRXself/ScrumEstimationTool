@@ -17,7 +17,7 @@ namespace ScrumEstimationTool.Controllers
         {
             return new EstimationResultModel
             {
-                EstimationResult = _estimationResult.GetEstimationResult(),
+                Estimations = _estimationResult.GetEstimationResult(),
                 ParticipantsName = _estimationResult.GetParticipantsName(),
                 Count = _estimationResult.GetEstimationCount()
             };

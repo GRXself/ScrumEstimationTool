@@ -24,17 +24,12 @@ namespace ScrumEstimationTool.Core
             _estimationResult = new EstimationResult();
         }
 
-        public override string ToString()
+        public List<string> GetEstimationResult()
         {
-            var s = "";
+            var estimations = new List<string>();
             var participantsInAscendingOrder = _participants.OrderBy(p => p.PersonalEstimation).ToList();
-            participantsInAscendingOrder.ForEach(p => s += p.Name + ": " + p.PersonalEstimation + "; ");
-            return s.Trim();
-        }
-
-        public string GetEstimationResult()
-        {
-            return ToString();
+            participantsInAscendingOrder.ForEach(p => estimations.Add(p.Name + ": " + p.PersonalEstimation));
+            return estimations;
         }
 
         public string GetParticipantsName()

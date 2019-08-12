@@ -4,7 +4,7 @@ namespace ScrumEstimationTool.Models
 {
     public class EstimationResultModel
     {
-        public string EstimationResult { get; set; }
+        public List<string> Estimations { get; set; }
         
         public string ParticipantsName { get; set; }
         
