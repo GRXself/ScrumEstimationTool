@@ -9,5 +9,7 @@ namespace ScrumEstimationTool.Models
         public string ParticipantsName { get; set; }
         
         public int Count { get; set; }
+        
+        public bool Expired { get; set; }
     }
 }

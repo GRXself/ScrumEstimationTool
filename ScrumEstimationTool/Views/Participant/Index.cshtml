@@ -6,24 +6,35 @@
 }
 
 <script type="text/javascript">
+    window.onload = LoadRoomInfo;
+
     function SubmitEstimation() {
+        if (IsRoomIdEmpty()) {
+            return;
+        }
+        
         const participantName = $('#participant-name');
         const participantEstimation = $('#participant-estimation');
-        if (participantName.val().trim().length === 0 || participantEstimation.text().trim().length === 0)
-        {
-            alert("Please give your name and estimation!");
-        }
-        else
-        {
+            if (participantName.val().trim().length === 0 || participantEstimation.text().trim().length === 0)
+            {
+                alert("Please give your name and estimation!");
+            }
+            else
+            {
             $.ajax({
                 url: '@Url.Action("SubmitEstimationPoint", "Participant")',
                 type: 'POST',
                 data: {
-                Name: participantName.val(),
-                PersonalEstimation: participantEstimation.text(),
+                    Name: participantName.val(),
+                    PersonalEstimation: participantEstimation.text(),
                 },
-                success: function() {
-                    alert("Submit Success");
+                success: function(data) {
+                    if (data.expired === true) {
+                        alert("Room not exist! Please reenter a room!")
+                    }
+                    else{
+                        alert("Submit Success");
+                    }
                 }
             })
         }
@@ -56,6 +67,11 @@
 </style>
 
 <h2>Participant</h2>
+
+<div>
+  Current room id:
+  <p id="roomId-show"></p>
+</div>
 
 <div>
     Click the card below giving a quick estimation:

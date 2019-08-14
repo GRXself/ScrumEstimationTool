@@ -7,22 +7,6 @@ namespace ScrumEstimationTool.Core
     public class EstimationResult
     {
         private readonly List<ParticipantModel> _participants = new List<ParticipantModel>();
-        
-        private static EstimationResult _estimationResult = new EstimationResult();
-
-        private EstimationResult()
-        {
-        }
-
-        public static EstimationResult GetInstance()
-        {
-            return _estimationResult;
-        }
-
-        public static void ResetEstimationResult()
-        {
-            _estimationResult = new EstimationResult();
-        }
 
         public List<string> GetEstimationResult()
         {

@@ -1,3 +1,5 @@
+using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ScrumEstimationTool.Core;
 using ScrumEstimationTool.Models;
@@ -6,7 +8,9 @@ namespace ScrumEstimationTool.Controllers
 {
     public class HostController : Controller
     {
-        private readonly EstimationResult _estimationResult = EstimationResult.GetInstance();
+        private readonly RoomList _roomList = RoomList.GetInstance();
+
+        private Room _currentRoom;
         
         public IActionResult Index()
         {
@@ -15,18 +19,39 @@ namespace ScrumEstimationTool.Controllers
 
         public ActionResult<EstimationResultModel> GetCurrentEstimationResult()
         {
+            InitializeProperties();
+            
+            if (_currentRoom is null)
+            {
+                return new EstimationResultModel
+                {
+                    Expired = true
+                };
+            }
+            
+            var estimationResult = _currentRoom.EstimationResult;
+            
             return new EstimationResultModel
             {
-                Estimations = _estimationResult.GetEstimationResult(),
-                ParticipantsName = _estimationResult.GetParticipantsName(),
-                Count = _estimationResult.GetEstimationCount()
+                Estimations = estimationResult.GetEstimationResult(),
+                ParticipantsName = estimationResult.GetParticipantsName(),
+                Count = estimationResult.GetEstimationCount(),
             };
         }
 
         public IActionResult ResetEstimation()
         {
-            EstimationResult.ResetEstimationResult();
+            InitializeProperties();
+            
+            _currentRoom.EstimationResult = new EstimationResult();
+            
             return Ok();
+        }
+
+        private void InitializeProperties()
+        {
+            var roomId = HttpContext.Session.GetInt32("RoomId");
+            _currentRoom = roomId.HasValue ? _roomList.FindRoom(roomId.Value) : null;
         }
     }
 }
