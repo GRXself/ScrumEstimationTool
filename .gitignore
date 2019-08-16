@@ -8,3 +8,6 @@
 
 # ignore emacs auto saved file (back up)
 *~
+
+# ignore nginx setting
+nginx/

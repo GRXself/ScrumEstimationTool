@@ -1,0 +1,17 @@
+version: "3"
+services:
+    web:
+        image: grxself/scrum-estimation-tool:v0.1.2
+        expose:
+            - "5000"
+    proxy:
+        build:
+            context:  ./nginx
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - /etc/sslcert/:/etc/sslcert/
+        links:
+            - web
