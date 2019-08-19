@@ -40,15 +40,32 @@
         }
     }
     
+    function PokerCardOnSelected(pokercard) {
+      ResetAllPokerCard();
+      SetEstimationOnClick(pokercard);
+      ChangeCSSOnSelected(pokercard);
+    }
+    
     function SetEstimationOnClick(pokerCard) {
       $('#participant-estimation').text($(pokerCard).text());
+    }
+    
+    function ChangeCSSOnSelected(pokerCard) {
+      $(pokerCard).removeClass("poker-card");
+      $(pokerCard).addClass("poker-card-selected");
+    }
+    
+    function ResetAllPokerCard() {
+      var allPokerCards = $(".poker-card-container > div");
+      allPokerCards.removeClass("poker-card-selected");
+      allPokerCards.addClass("poker-card");
     }
 </script>
 
 <style>
 .poker-card-container {
   float:left;
-  padding: 30px;
+  padding: 10px 30px;
 }
 .poker-card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -64,13 +81,44 @@
 .poker-card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
+.poker-card-selected {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-color: #c66c62;
+  transition: 0.3s;
+  
+  width: 130px;
+  padding: 70px 50px;
+  
+  text-align: center;
+  font-size: 20px;
+}
+.participant-panel {
+  float:left;
+  padding: 30px;
+  width: 50%;
+}
 </style>
 
 <h2>Participant</h2>
 
 <div>
-  Current room id:
-  <p id="roomId-show"></p>
+    <div class="participant-panel" style="border-right: 5px solid">
+        Current room id:
+        <p id="roomId-show"></p>
+    </div>
+    
+    <div class="participant-panel">
+        <form>
+            Your Name: 
+            <input id="participant-name" type="text"/> <br/>
+            Your Current Estimation:
+            <text id="participant-estimation">1</text> <br/>
+            <input type="button" onclick="SubmitEstimation()" value="Submit"/>
+        </form>
+    </div>
+    
+    <div>
+    </div>
 </div>
 
 <div>
@@ -78,39 +126,24 @@
 </div>
 <div width="100%">
     <div class="poker-card-container">
-        <div class="poker-card" onclick="SetEstimationOnClick(this)">1</div>
+        <div class="poker-card" onclick="PokerCardOnSelected(this)">1</div>
     </div>
     <div class="poker-card-container">
-        <div class="poker-card" onclick="SetEstimationOnClick(this)">2</div>
+        <div class="poker-card" onclick="PokerCardOnSelected(this)">2</div>
     </div>
     <div class="poker-card-container">
-        <div class="poker-card" onclick="SetEstimationOnClick(this)">3</div>
+        <div class="poker-card" onclick="PokerCardOnSelected(this)">3</div>
     </div>
     <div class="poker-card-container">
-        <div class="poker-card" onclick="SetEstimationOnClick(this)">5</div>
+        <div class="poker-card" onclick="PokerCardOnSelected(this)">5</div>
     </div>
     <div class="poker-card-container">
-        <div class="poker-card" onclick="SetEstimationOnClick(this)">8</div>
+        <div class="poker-card" onclick="PokerCardOnSelected(this)">8</div>
     </div>
     <div class="poker-card-container">
-        <div class="poker-card" onclick="SetEstimationOnClick(this)">666</div>
+        <div class="poker-card" onclick="PokerCardOnSelected(this)">666</div>
     </div>
     <div class="poker-card-container">
-        <div class="poker-card" onclick="SetEstimationOnClick(this)">0</div>
+        <div class="poker-card" onclick="PokerCardOnSelected(this)">0</div>
     </div>
-</div>
-
-<div style="clear:both;"></div>
-
-<div>
-    <form>
-        Your Name: 
-        <input id="participant-name" type="text"/> <br/>
-        Your Current Estimation:
-        <text id="participant-estimation">1</text>
-    </form>
-</div>
-
-<div align="center">
-    <input type="button" onclick="SubmitEstimation()" value="Submit"/>
 </div>
