@@ -6,7 +6,7 @@
 }
 
 <script type="text/javascript">
-    window.onload = LoadRoomInfo;
+    window.onload = LoadHostPage;
 
     function GetCurrentEstimationResult() {
       if (IsRoomIdEmpty()) {
@@ -54,23 +54,53 @@
         })
       }
     }
+    
+    function copySharedLink() {
+      /* Get the text field */
+      var copyText = $('#room-link');
+    
+      /* Select the text field */
+      copyText.select();
+    
+      /* Copy the text inside the text field */
+      document.execCommand("copy");
+    }
 </script>
+
+<style>
+.host-panel {
+  float:left;
+  padding: 30px;
+  width: 50%;
+}
+.link-show {
+  width: 100%;
+}
+</style>
 
 <h2>Host</h2>
 
 <div>
-  Current room id:
-  <p id="roomId-show"></p>
+  <div class="host-panel" style="border-right: 5px solid">
+    <div>
+      Current room id:
+      <p id="roomId-show"></p>
+    </div>
+
+    <div>
+      <a type="button" onclick="GetCurrentEstimationResult()">&nbsp; Show estimations &nbsp;</a>
+      <a type="button" onclick="Reset()">&nbsp; Reset &nbsp;</a>
+    </div>
+
+    <div>
+      Estimation Result:
+      <p id="estimation-result-content">There is the result.</p>
+    </div>
+  </div>
+
+  <div class="host-panel">
+    Share the link below to join the room: <br/>
+    <input class="link-show" type="text" id="room-link"> <br/>
+    <button onclick="copySharedLink()">Copy</button><br>
+  </div>
 </div>
-
-<div>
-    <a type="button" onclick="GetCurrentEstimationResult()">&nbsp; Show estimations &nbsp;</a>
-    <a type="button" onclick="Reset()">&nbsp; Reset &nbsp;</a>
-</div>
-
-<div>
-  Estimation Result:
-  <p id="estimation-result-content">There is the result.</p>
-</div>
-
-

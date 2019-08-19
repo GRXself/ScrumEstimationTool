@@ -6,10 +6,8 @@ using ScrumEstimationTool.Models;
 
 namespace ScrumEstimationTool.Controllers
 {
-    public class HostController : Controller
+    public class HostController : ControllerRoomBase
     {
-        private readonly RoomList _roomList = RoomList.GetInstance();
-
         private Room _currentRoom;
         
         public IActionResult Index()
@@ -51,7 +49,7 @@ namespace ScrumEstimationTool.Controllers
         private void InitializeProperties()
         {
             var roomId = HttpContext.Session.GetInt32("RoomId");
-            _currentRoom = roomId.HasValue ? _roomList.FindRoom(roomId.Value) : null;
+            _currentRoom = roomId.HasValue ? RoomList.FindRoom(roomId.Value) : null;
         }
     }
 }

@@ -9,6 +9,21 @@ function LoadRoomInfo() {
     $('#roomId-show').text(roomId);
 }
 
+function LoadRoomShareLink() {
+    let hostName = window.location.hostname;
+    if(window.location.port)
+    {
+        hostName += ":" + window.location.port;
+    }
+    const sharedLink = "https://" + hostName + "/Participant/JoinRoom/?roomId=" + Cookies.get('RoomId');
+    $('#room-link').val(sharedLink);
+}
+
+function LoadHostPage() {
+    LoadRoomInfo();
+    LoadRoomShareLink();
+}
+
 function JoinRoom() {
     $.ajax({
         url: '/Home/JoinRoom',

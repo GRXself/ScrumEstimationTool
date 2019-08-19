@@ -6,10 +6,8 @@ using ScrumEstimationTool.Models;
 
 namespace ScrumEstimationTool.Controllers
 {
-    public class ParticipantController : Controller
+    public class ParticipantController : ControllerRoomBase
     {
-        private readonly RoomList _roomList = RoomList.GetInstance();
-        
         private Room _currentRoom;
 
         public IActionResult Index()
@@ -29,10 +27,25 @@ namespace ScrumEstimationTool.Controllers
             });
         }
         
+        public ActionResult<JoinRoomResultModel> JoinRoom(int roomId)
+        {
+            var room = RoomList.FindRoom(roomId);
+
+            if (room is null)
+            {
+                return new JoinRoomResultModel();
+            }
+            
+            HttpContext.Session.SetInt32(KeyRoomId, roomId);
+            Response.Cookies.Append(KeyRoomId, roomId.ToString());
+
+            return View("~/Views/Participant/Index.cshtml");
+        }
+        
         private void InitializeProperties()
         {
             var roomId = HttpContext.Session.GetInt32("RoomId");
-            _currentRoom = roomId.HasValue ? _roomList.FindRoom(roomId.Value) : null;
+            _currentRoom = roomId.HasValue ? RoomList.FindRoom(roomId.Value) : null;
         }
     }
 }

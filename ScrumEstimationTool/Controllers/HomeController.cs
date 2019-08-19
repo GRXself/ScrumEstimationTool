@@ -10,11 +10,8 @@ using ScrumEstimationTool.Models;
 
 namespace ScrumEstimationTool.Controllers
 {
-    public class HomeController : Controller
-    {
-        private readonly RoomList _roomList = RoomList.GetInstance();
-        private const string KeyRoomId = "RoomId";
-        
+    public class HomeController : ControllerRoomBase
+    { 
         public IActionResult Index()
         {
             return View();
@@ -33,7 +30,7 @@ namespace ScrumEstimationTool.Controllers
 
         public IActionResult CreateRoom(int roomId)
         {
-            var newRoom = _roomList.CreateRoom(roomId);
+            var newRoom = RoomList.CreateRoom(roomId);
             
             HttpContext.Session.SetInt32(KeyRoomId, roomId);
             Response.Cookies.Append(KeyRoomId, roomId.ToString());
@@ -43,7 +40,7 @@ namespace ScrumEstimationTool.Controllers
 
         public ActionResult<JoinRoomResultModel> JoinRoom(int roomId)
         {
-            var room = _roomList.FindRoom(roomId);
+            var room = RoomList.FindRoom(roomId);
 
             if (room is null)
             {
