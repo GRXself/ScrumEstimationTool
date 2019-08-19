@@ -28,14 +28,24 @@ namespace ScrumEstimationTool.Controllers
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
 
-        public IActionResult CreateRoom(int roomId)
+        public ActionResult<CreateRoomResultModel> CreateRoom(int roomId)
         {
-            var newRoom = RoomList.CreateRoom(roomId);
+            var room = RoomList.FindRoom(roomId);
+
+            if (!(room is null))
+            {
+                return new CreateRoomResultModel()
+                {
+                    ExistRoom = true
+                };
+            }
+            
+            RoomList.CreateRoom(roomId);
             
             HttpContext.Session.SetInt32(KeyRoomId, roomId);
             Response.Cookies.Append(KeyRoomId, roomId.ToString());
             
-            return Json(Url.Action("Index", "Host"));
+            return new CreateRoomResultModel();
         }
 
         public ActionResult<JoinRoomResultModel> JoinRoom(int roomId)

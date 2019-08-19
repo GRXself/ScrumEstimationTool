@@ -33,6 +33,28 @@ function LoadParticipantPage() {
     LoadParticipantName();
 }
 
+function CreateRoom() {
+    $.ajax({
+        url: '/Home/CreateRoom',
+        type: 'POST',
+        data: {
+            roomId: $('#roomId-given').val(),
+        },
+        success: function(data) {
+            RedirectToHostOnCreateRoom(data)
+        }
+    })
+}
+
+function RedirectToHostOnCreateRoom(joinResult){
+    if (!joinResult.existRoom){
+        window.location.replace("/Host/Index");
+    }
+    else {
+        alert("Room id exist! Please create another room!")
+    }
+}
+
 function JoinRoom() {
     $.ajax({
         url: '/Home/JoinRoom',

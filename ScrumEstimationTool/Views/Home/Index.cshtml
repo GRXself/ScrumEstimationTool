@@ -2,21 +2,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-<script type="text/javascript">
-  function CreateRoom() {
-    $.ajax({
-      url: '@Url.Action("CreateRoom", "Home")',
-      type: 'POST',
-      data: {
-        roomId: $('#roomId-given').val(),
-      },
-      success: function(data) {
-        window.location.href = data;
-      }
-    })
-  }
-</script>
-
 <style>
 .homepage-panel {
   float:left;
