@@ -19,9 +19,18 @@ function LoadRoomShareLink() {
     $('#room-link').val(sharedLink);
 }
 
+function LoadParticipantName() {
+    $('#participant-name').val(Cookies.get('UserName'));
+}
+
 function LoadHostPage() {
     LoadRoomInfo();
     LoadRoomShareLink();
+}
+
+function LoadParticipantPage() {
+    LoadRoomInfo();
+    LoadParticipantName();
 }
 
 function JoinRoom() {

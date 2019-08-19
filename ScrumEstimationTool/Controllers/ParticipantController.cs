@@ -19,6 +19,9 @@ namespace ScrumEstimationTool.Controllers
         {
             InitializeProperties();
             
+            HttpContext.Session.SetString(KeyUserName, participant.Name);
+            Response.Cookies.Append(KeyUserName, participant.Name);
+            
             var estimationResult = _currentRoom.EstimationResult;
             
             estimationResult.AddNewEstimation(participant);
