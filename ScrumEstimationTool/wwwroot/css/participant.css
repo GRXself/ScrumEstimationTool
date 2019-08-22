@@ -1,0 +1,35 @@
+.poker-card__container {
+    float:left;
+    padding: 10px 30px;
+}
+.poker-card__body {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: #8ec6b5;
+    transition: 0.3s;
+
+    width: 130px;
+    padding: 70px 50px;
+
+    text-align: center;
+    font-size: 20px;
+}
+.poker-card__body:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.poker-card--selected {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: #c66c62;
+    transition: 0.3s;
+
+    width: 130px;
+    padding: 70px 50px;
+
+    text-align: center;
+    font-size: 20px;
+}
+
+.participant-panel {
+    float:left;
+    padding: 30px;
+    width: 50%;
+}

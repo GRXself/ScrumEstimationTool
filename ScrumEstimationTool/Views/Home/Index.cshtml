@@ -2,13 +2,9 @@
     ViewData["Title"] = "Home Page";
 }
 
-<style>
-.homepage-panel {
-  float:left;
-  padding: 30px;
-  width: 50%;
-}
-</style>
+<link rel="stylesheet" href="~/css/home.css" />
+
+<script src="~/js/home.js"></script>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
@@ -22,7 +18,7 @@
     Create a room? <br/>
     Room Id:
     <input id="roomId-given" type="text"/> <br/>
-    <input type="button" value="Get this room!" onclick="CreateRoom()"/>
+    <input type="button" value="Get this room!" onclick="createRoom()"/>
   </div>
 
   <div class="homepage-panel">
@@ -30,6 +26,6 @@
     Join a room? <br/>
     Room Id:
     <input id="roomId-join" type="text"/> <br/>
-    <input type="button" value="Join!" onclick="JoinRoom()"/>
+    <input type="button" value="Join!" onclick="joinRoom()"/>
   </div>
 </div>

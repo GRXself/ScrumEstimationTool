@@ -5,78 +5,13 @@
     Layout = "_Layout";
 }
 
-<script type="text/javascript">
-    window.onload = LoadHostPage;
+<link rel="stylesheet" href="~/css/host.css" />
 
-    function GetCurrentEstimationResult() {
-      if (IsRoomIdEmpty()) {
-        return;
-      }
-      
-      $.ajax({
-        url: '@Url.Action("GetCurrentEstimationResult", "Host")',
-        type: 'POST',
-        data: {
-            
-        },
-        success: function(currentEstimationResult) {
-          if (currentEstimationResult.expired === true)
-          {
-            alert("Session expired! Please create a new room.")
-          }
-          else{
-            if (confirm(currentEstimationResult.count + " guys voted, show result?" +
-             "\rCurrent participants: \r" + currentEstimationResult.participantsName))
-            {
-              const estimationResultShowArea = $('#estimation-result-content');
-              estimationResultShowArea.text("");
-              for (const singleEstimation of currentEstimationResult.estimations) 
-              {
-                estimationResultShowArea.append(singleEstimation + "<br/>");
-              }
-            }
-          }
-        }
-      })
-    }
-    
-    function Reset() {
-      if (confirm("Reset?")) {
-        $.ajax({
-          url: '@Url.Action("ResetEstimation", "Host")',
-          type: 'POST',
-          data: {
-              
-          },
-          success: function(resetResult) {
-            $('#estimation-result-content').text("Estimation Refreshed.");
-          }
-        })
-      }
-    }
-    
-    function copySharedLink() {
-      /* Get the text field */
-      var copyText = $('#room-link');
-    
-      /* Select the text field */
-      copyText.select();
-    
-      /* Copy the text inside the text field */
-      document.execCommand("copy");
-    }
+<script src="~/js/host.js"></script>
+
+<script>
+    window.onload = loadHostPage;
 </script>
-
-<style>
-.host-panel {
-  float:left;
-  padding: 30px;
-  width: 50%;
-}
-.link-show {
-  width: 100%;
-}
-</style>
 
 <h2>Host</h2>
 
@@ -88,8 +23,8 @@
     </div>
 
     <div>
-      <a type="button" onclick="GetCurrentEstimationResult()">&nbsp; Show estimations &nbsp;</a>
-      <a type="button" onclick="Reset()">&nbsp; Reset &nbsp;</a>
+      <a type="button" onclick="getCurrentEstimationResult()">&nbsp; Show estimations &nbsp;</a>
+      <a type="button" onclick="reset()">&nbsp; Reset &nbsp;</a>
     </div>
 
     <div>

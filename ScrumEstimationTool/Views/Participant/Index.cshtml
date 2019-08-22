@@ -5,99 +5,13 @@
     Layout = "_Layout";
 }
 
-<script type="text/javascript">
-    window.onload = LoadParticipantPage;
+<link rel="stylesheet" href="~/css/participant.css" />
 
-    function SubmitEstimation() {
-        if (IsRoomIdEmpty()) {
-            return;
-        }
-        
-        const participantName = $('#participant-name');
-        const participantEstimation = $('#participant-estimation');
-            if (participantName.val().trim().length === 0 || participantEstimation.text().trim().length === 0)
-            {
-                alert("Please give your name and estimation!");
-            }
-            else
-            {
-            $.ajax({
-                url: '@Url.Action("SubmitEstimationPoint", "Participant")',
-                type: 'POST',
-                data: {
-                    Name: participantName.val(),
-                    PersonalEstimation: participantEstimation.text(),
-                },
-                success: function(data) {
-                    if (data.expired === true) {
-                        alert("Room not exist! Please reenter a room!")
-                    }
-                    else{
-                        alert("Submit Success");
-                    }
-                }
-            })
-        }
-    }
-    
-    function PokerCardOnSelected(pokercard) {
-      ResetAllPokerCard();
-      SetEstimationOnClick(pokercard);
-      ChangeCSSOnSelected(pokercard);
-    }
-    
-    function SetEstimationOnClick(pokerCard) {
-      $('#participant-estimation').text($(pokerCard).text());
-    }
-    
-    function ChangeCSSOnSelected(pokerCard) {
-      $(pokerCard).removeClass("poker-card");
-      $(pokerCard).addClass("poker-card-selected");
-    }
-    
-    function ResetAllPokerCard() {
-      var allPokerCards = $(".poker-card-container > div");
-      allPokerCards.removeClass("poker-card-selected");
-      allPokerCards.addClass("poker-card");
-    }
+<script src="~/js/participant.js"></script>
+
+<script>
+    window.onload = loadParticipantPage;
 </script>
-
-<style>
-.poker-card-container {
-  float:left;
-  padding: 10px 30px;
-}
-.poker-card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  background-color: #8ec6b5;
-  transition: 0.3s;
-  
-  width: 130px;
-  padding: 70px 50px;
-  
-  text-align: center;
-  font-size: 20px;
-}
-.poker-card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-.poker-card-selected {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  background-color: #c66c62;
-  transition: 0.3s;
-  
-  width: 130px;
-  padding: 70px 50px;
-  
-  text-align: center;
-  font-size: 20px;
-}
-.participant-panel {
-  float:left;
-  padding: 30px;
-  width: 50%;
-}
-</style>
 
 <h2>Participant</h2>
 
@@ -113,7 +27,7 @@
             <input id="participant-name" type="text"/> <br/>
             Your Current Estimation:
             <text id="participant-estimation">1</text> <br/>
-            <input type="button" onclick="SubmitEstimation()" value="Submit"/>
+            <input type="button" onclick="submitEstimation()" value="Submit"/>
         </form>
     </div>
     
@@ -125,26 +39,26 @@
     Click the card below giving a quick estimation:
 </div>
 <div width="100%">
-    <div class="poker-card-container">
-        <div class="poker-card" onclick="PokerCardOnSelected(this)">1</div>
+    <div class="poker-card__container">
+        <div class="poker-card__body" onclick="pokerCardOnSelected(this)">1</div>
     </div>
-    <div class="poker-card-container">
-        <div class="poker-card" onclick="PokerCardOnSelected(this)">2</div>
+    <div class="poker-card__container">
+        <div class="poker-card__body" onclick="pokerCardOnSelected(this)">2</div>
     </div>
-    <div class="poker-card-container">
-        <div class="poker-card" onclick="PokerCardOnSelected(this)">3</div>
+    <div class="poker-card__container">
+        <div class="poker-card__body" onclick="pokerCardOnSelected(this)">3</div>
     </div>
-    <div class="poker-card-container">
-        <div class="poker-card" onclick="PokerCardOnSelected(this)">5</div>
+    <div class="poker-card__container">
+        <div class="poker-card__body" onclick="pokerCardOnSelected(this)">5</div>
     </div>
-    <div class="poker-card-container">
-        <div class="poker-card" onclick="PokerCardOnSelected(this)">8</div>
+    <div class="poker-card__container">
+        <div class="poker-card__body" onclick="pokerCardOnSelected(this)">8</div>
     </div>
-    <div class="poker-card-container">
-        <div class="poker-card" onclick="PokerCardOnSelected(this)">666</div>
+    <div class="poker-card__container">
+        <div class="poker-card__body" onclick="pokerCardOnSelected(this)">666</div>
     </div>
-    <div class="poker-card-container">
-        <div class="poker-card" onclick="PokerCardOnSelected(this)">0</div>
+    <div class="poker-card__container">
+        <div class="poker-card__body" onclick="pokerCardOnSelected(this)">0</div>
     </div>
 </div>
 

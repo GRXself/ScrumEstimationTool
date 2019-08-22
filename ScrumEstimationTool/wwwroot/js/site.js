@@ -2,94 +2,50 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-function LoadRoomInfo() {
-    IsRoomIdEmpty();
-    
-    const roomId = Cookies.get('RoomId');
-    $('#roomId-show').text(roomId);
+function loadRoomInfo() {
+  isRoomIdEmpty();
+
+  const roomId = Cookies.get('RoomId');
+  $('#roomId-show').text(roomId);
 }
 
-function LoadRoomShareLink() {
-    let hostName = window.location.hostname;
-    if(window.location.port)
-    {
-        hostName += ":" + window.location.port;
-    }
-    const sharedLink = "https://" + hostName + "/Participant/JoinRoom/?roomId=" + Cookies.get('RoomId');
-    $('#room-link').val(sharedLink);
+function loadRoomShareLink() {
+  let hostName = window.location.hostname;
+  if (window.location.port) {
+    hostName += ":" + window.location.port;
+  }
+  const sharedLink = "https://" + hostName + "/Participant/JoinRoom/?roomId=" + Cookies.get('RoomId');
+  $('#room-link').val(sharedLink);
 }
 
-function LoadParticipantName() {
-    $('#participant-name').val(Cookies.get('UserName'));
+function loadParticipantName() {
+  $('#participant-name').val(Cookies.get('UserName'));
 }
 
-function LoadHostPage() {
-    LoadRoomInfo();
-    LoadRoomShareLink();
+function loadHostPage() {
+  loadRoomInfo();
+  loadRoomShareLink();
 }
 
-function LoadParticipantPage() {
-    LoadRoomInfo();
-    LoadParticipantName();
+function loadParticipantPage() {
+  loadRoomInfo();
+  loadParticipantName();
 }
 
-function CreateRoom() {
-    $.ajax({
-        url: '/Home/CreateRoom',
-        type: 'POST',
-        data: {
-            roomId: $('#roomId-given').val(),
-        },
-        success: function(data) {
-            RedirectToHostOnCreateRoom(data)
-        }
-    })
-}
-
-function RedirectToHostOnCreateRoom(joinResult){
-    if (!joinResult.existRoom){
-        window.location.replace("/Host/Index");
-    }
-    else {
-        alert("Room id exist! Please create another room!")
-    }
-}
-
-function JoinRoom() {
-    $.ajax({
-        url: '/Home/JoinRoom',
-        type: 'POST',
-        data: {
-            roomId: $('#roomId-join').val(),
-        },
-        success: function(data) {
-            RedirectToParticipantOnJoinRoom(data)
-        }
-    });
-}
-
-function RedirectToParticipantOnJoinRoom(joinResult){
-    if (joinResult.existRoom){
-        window.location.replace("/Participant/Index");
-    }
-    else {
-        alert("Room id not exist! Please confirm your room id.")
-    }
-}
 
 /**
  * @return {boolean}
  */
-function IsRoomIdEmpty() {
-    const roomId = Cookies.get('RoomId');
+function isRoomIdEmpty() {
+  const roomId = Cookies.get('RoomId');
 
-    if (!roomId) {
-        const alertMessage = "Please join a room first!";
-        alert(alertMessage);
-        $('#roomId-show').text(alertMessage);
-        window.location.replace("/Home");
-        return true;
-    }
-    
-    return false;
+  if (!roomId) {
+    const alertMessage = "Please join a room first!";
+    alert(alertMessage);
+    $('#roomId-show').text(alertMessage);
+    window.location.replace("/Home");
+    return true;
+  }
+
+  return false;
 }
