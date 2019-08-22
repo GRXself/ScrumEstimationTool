@@ -30,7 +30,20 @@ namespace ScrumEstimationTool.Core
 
         public void AddNewEstimation(ParticipantModel participant)
         {
-            _participants.Add(participant);
+            var currentParticipant = GetParticipantModelByName(participant.Name);
+
+            if (currentParticipant is null)
+            {
+                _participants.Add(participant);
+                return;
+            }
+
+            currentParticipant.PersonalEstimation = participant.PersonalEstimation;
+        }
+
+        private ParticipantModel GetParticipantModelByName(string participantName)
+        {
+            return _participants.FirstOrDefault(p => p.Name.Equals(participantName));
         }
     }
 }
