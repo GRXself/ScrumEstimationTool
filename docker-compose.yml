@@ -1,7 +1,7 @@
 version: "3"
 services:
     web:
-        image: grxself/scrum-estimation-tool:v1.0.0
+        image: grxself/scrum-estimation-tool:v1.1.0
         expose:
             - "5000"
     proxy:
