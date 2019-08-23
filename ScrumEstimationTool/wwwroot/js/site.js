@@ -18,8 +18,13 @@ function loadRoomShareLink() {
   $('#room-link').val(sharedLink);
 }
 
-function loadParticipantName() {
+function loadParticipantInfo() {
   $('#participant-name').val(Cookies.get('UserName'));
+
+  let currentEstimation = Cookies.get('UserEstimation');
+  let pokerCardSelector = ".poker-card__container > div:contains(" + currentEstimation + ")";
+  let currentPokerCardSelection = $(pokerCardSelector);
+  pokerCardOnSelected(currentPokerCardSelection);
 }
 
 function loadHostPage() {
@@ -29,7 +34,7 @@ function loadHostPage() {
 
 function loadParticipantPage() {
   loadRoomInfo();
-  loadParticipantName();
+  loadParticipantInfo();
 }
 
 

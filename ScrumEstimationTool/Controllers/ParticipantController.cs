@@ -18,18 +18,20 @@ namespace ScrumEstimationTool.Controllers
         public IActionResult SubmitEstimationPoint(ParticipantModel participant)
         {
             InitializeProperties();
-            
+
             HttpContext.Session.SetString(KeyUserName, participant.Name);
+            HttpContext.Session.SetInt32(KeyUserEstimation, participant.PersonalEstimation);
             Response.Cookies.Append(KeyUserName, participant.Name);
-            
+            Response.Cookies.Append(KeyUserEstimation, participant.PersonalEstimation.ToString());
+
             var estimationResult = _currentRoom.EstimationResult;
-            
+
             estimationResult.AddNewEstimation(participant);
             return Json(new {
                 Expired = false,
             });
         }
-        
+
         public ActionResult<JoinRoomResultModel> JoinRoom(int roomId)
         {
             var room = RoomList.FindRoom(roomId);
@@ -38,13 +40,13 @@ namespace ScrumEstimationTool.Controllers
             {
                 return new JoinRoomResultModel();
             }
-            
+
             HttpContext.Session.SetInt32(KeyRoomId, roomId);
             Response.Cookies.Append(KeyRoomId, roomId.ToString());
 
             return View("~/Views/Participant/Index.cshtml");
         }
-        
+
         private void InitializeProperties()
         {
             var roomId = HttpContext.Session.GetInt32("RoomId");

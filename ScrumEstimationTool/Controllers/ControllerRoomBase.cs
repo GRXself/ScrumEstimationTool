@@ -8,5 +8,6 @@ namespace ScrumEstimationTool.Controllers
         protected readonly RoomList RoomList = RoomList.GetInstance();
         protected const string KeyRoomId = "RoomId";
         protected const string KeyUserName = "UserName";
+        protected const string KeyUserEstimation = "UserEstimation";
     }
 }

@@ -26,10 +26,10 @@ function submitEstimation() {
   }
 }
 
-function pokerCardOnSelected(pokercard) {
+function pokerCardOnSelected(pokerCard) {
   resetAllPokerCard();
-  setEstimationOnClick(pokercard);
-  changeCSSOnSelected(pokercard);
+  setEstimationOnClick(pokerCard);
+  changeCSSOnSelected(pokerCard);
 }
 
 function setEstimationOnClick(pokerCard) {
