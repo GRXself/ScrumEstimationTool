@@ -20,6 +20,8 @@ namespace ScrumEstimationTool
             Configuration = configuration;
         }
 
+        private const string FrontEndAllowSpecificOrigins = "_frontEndAllowSpecificOrigins";
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -34,7 +36,7 @@ namespace ScrumEstimationTool
             services.AddHostedService<TimedHostedService>();
 
             services.AddDistributedMemoryCache();
-            
+
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.
@@ -43,7 +45,18 @@ namespace ScrumEstimationTool
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
             });
-            
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(FrontEndAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:8080")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -60,6 +73,8 @@ namespace ScrumEstimationTool
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors(FrontEndAllowSpecificOrigins);
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
