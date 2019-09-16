@@ -11,7 +11,7 @@ using ScrumEstimationTool.Models;
 namespace ScrumEstimationTool.Controllers
 {
     public class HomeController : ControllerRoomBase
-    { 
+    {
         public IActionResult Index()
         {
             return View();
@@ -39,12 +39,12 @@ namespace ScrumEstimationTool.Controllers
                     ExistRoom = true
                 };
             }
-            
+
             RoomList.CreateRoom(roomId);
-            
+
             HttpContext.Session.SetInt32(KeyRoomId, roomId);
             Response.Cookies.Append(KeyRoomId, roomId.ToString());
-            
+
             return new CreateRoomResultModel();
         }
 
@@ -56,7 +56,7 @@ namespace ScrumEstimationTool.Controllers
             {
                 return new JoinRoomResultModel();
             }
-            
+
             HttpContext.Session.SetInt32(KeyRoomId, roomId);
             Response.Cookies.Append(KeyRoomId, roomId.ToString());
 
