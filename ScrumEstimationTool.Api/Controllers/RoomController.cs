@@ -19,6 +19,8 @@ namespace ScrumEstimationTool.Api.Controllers
                 return NotFound();
             }
 
+            HttpContext.Session.SetInt32(KeyRoomId, room.Id);
+
             return room;
         }
 
